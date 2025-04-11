@@ -1,0 +1,32 @@
+name: Run Multiple Scripts Sequentially
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+jobs:
+  run-multiple:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run script 1
+        run: python lt50fy.py
+
+    #   - name: Run script 2
+    #     run: python scripts/second_script.py
+
+    #   - name: Run script 3
+    #     run: python scripts/third_script.py
