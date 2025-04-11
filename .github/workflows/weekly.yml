@@ -2,8 +2,18 @@ name: Run Multiple Scripts Sequentially
 
 on:
   schedule:
-    - cron: '0 6 * * 1'
-  workflow_dispatch:
+    - cron: '0 6 * * 1'  # Every Monday at 6:00 AM UTC
+  workflow_dispatch:     # Allows manual triggering
+
+env:
+  DB_HOST: ${{ secrets.DB_HOST }}
+  DB_NAME: ${{ secrets.DB_NAME }}
+  DB_USER: ${{ secrets.DB_USER }}
+  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+  DB_PORT: ${{ secrets.DB_PORT }}
+  AWS_REGION: ${{ secrets.AWS_REGION }}
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 jobs:
   run-multiple:
@@ -25,8 +35,9 @@ jobs:
       - name: Run script 1
         run: python lt50fy.py
 
-    #   - name: Run script 2
-    #     run: python scripts/second_script.py
+      # Uncomment and modify paths as needed:
+      # - name: Run script 2
+      #   run: python scripts/second_script.py
 
-    #   - name: Run script 3
-    #     run: python scripts/third_script.py
+      # - name: Run script 3
+      #   run: python scripts/third_script.py
