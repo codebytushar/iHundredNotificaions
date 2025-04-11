@@ -3,16 +3,14 @@ import psycopg2
 from dotenv import load_dotenv
 import boto3
 from botocore.exceptions import ClientError
-import logging
+from logger import get_logger
 from typing import List, Dict, Optional, Tuple  # Add Tuple to imports
 from datetime import datetime
 
 # Load environment variables
 load_dotenv()
 
-# Configure logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+logger = get_logger()
 
 # Database configuration
 DB_CONFIG = {

@@ -3,24 +3,22 @@ import psycopg2
 from dotenv import load_dotenv
 import boto3
 from botocore.exceptions import ClientError
-import logging
 from typing import List, Dict, Optional, Tuple, Set
 from datetime import datetime
 import time
-
 from general import create_student_email
+from logger import get_logger
 
+logger = get_logger()
 # Load environment variables
 load_dotenv()
 
-# Configure logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+
 
 # Constants
 MAX_RETRIES = 3  # Maximum number of retry attempts
 RETRY_DELAY = 5  # Seconds to wait between retries
-CHUNK_SIZE = 50  # Number of recipients per email (AWS SES limit is 50)
+CHUNK_SIZE = 14  # Number of recipients per email (AWS SES limit is 50)
 
 class EmailTracker:
     def __init__(self):

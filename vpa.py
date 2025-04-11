@@ -4,13 +4,12 @@ from typing import List, Dict, Optional
 import psycopg2
 from psycopg2 import sql as psql
 import boto3
-import logging
+from logger import get_logger
 
 load_dotenv()  # Add this line before accessing any environment variables
 
 # Set up logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+logger = get_logger()
 
 # Database configuration
 DB_CONFIG = {

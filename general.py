@@ -6,13 +6,17 @@ from botocore.exceptions import ClientError
 import logging
 from typing import List, Dict, Optional, Tuple  # Add Tuple to imports
 from datetime import datetime
+# another_script.py
+from logger import get_logger
+
+logger = get_logger()
 
 # Load environment variables
 load_dotenv()
 
-# Configure logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+# # Configure logging
+# logging.basicConfig(level=logging.INFO)
+# logger = logging.getLogger(__name__)
 
 # Database configuration
 DB_CONFIG = {
