@@ -1,4 +1,4 @@
-name: Database Backup to Azure
+name: Database Backup to Azure (ihundred,intranet)
 
 on:
   schedule:
@@ -35,4 +35,5 @@ jobs:
           AZURE_SAS_TOKEN: ${{ secrets.AZURE_SAS_TOKEN }}
         run: |
           pip install --upgrade pip
-          python backup_and_upload.py
+          python ihundred_dump.py
+          python intranet_dump.py
