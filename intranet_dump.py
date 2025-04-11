@@ -13,7 +13,7 @@ BACKUP_DIR = os.getenv("BACKUP_DIR", "/home/ihundred/backups")
 
 STORAGE_ACCOUNT = os.getenv("AZURE_STORAGE_ACCOUNT", "ihundredbackups")
 INTRANET_AZURE_STORAGE_CONTAINER = os.getenv("INTRANET_AZURE_STORAGE_CONTAINER", "intranetdbs")
-SAS_TOKEN = os.getenv("AZURE_SAS_TOKEN", "your_sas_token_here")
+INTRANET_AZURE_SAS_TOKEN = os.getenv("INTRANET_AZURE_SAS_TOKEN", "your_sas_token_here")
 
 # Prepare backup file
 timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
@@ -49,7 +49,7 @@ if result.returncode == 0:
         "azcopy",
         "copy",
         str(backup_file),
-        f"https://{STORAGE_ACCOUNT}.blob.core.windows.net/{INTRANET_AZURE_STORAGE_CONTAINER}/{backup_file.name}?{SAS_TOKEN}"
+        f"https://{STORAGE_ACCOUNT}.blob.core.windows.net/{INTRANET_AZURE_STORAGE_CONTAINER}/{backup_file.name}?{INTRANET_AZURE_SAS_TOKEN}"
     ]
 
     subprocess.run(azcopy_cmd)

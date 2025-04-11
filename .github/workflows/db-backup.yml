@@ -35,6 +35,7 @@ jobs:
           AZURE_STORAGE_CONTAINER: ${{ secrets.AZURE_STORAGE_CONTAINER }}
           INTRANET_AZURE_STORAGE_CONTAINER: ${{ secrets.INTRANET_AZURE_STORAGE_CONTAINER }}
           AZURE_SAS_TOKEN: ${{ secrets.AZURE_SAS_TOKEN }}
+          INTRANET_AZURE_SAS_TOKEN: ${{ secrets.INTRANET_AZURE_SAS_TOKEN }}
         run: |
           pip install --upgrade pip
           python ihundred_dump.py
