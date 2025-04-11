@@ -4,7 +4,7 @@ from typing import List, Dict, Optional
 import psycopg2
 from psycopg2 import sql as psql
 import boto3
-from logger import get_logger
+from logger_config import get_logger
 
 load_dotenv()  # Add this line before accessing any environment variables
 
@@ -210,4 +210,6 @@ def send_pending_notifications():
             logger.error(f"Failed to send notification to {verifier.verifierEmail}")
 
 if __name__ == "__main__":
+    logger.info("Notifications to verifiers regarding Pending Activities to verify: Scheduled Script Started Running...")
     send_pending_notifications()
+    logger.info("Notifications to verifiers regarding Pending Activities to verify: Scheduled Script Ended...")

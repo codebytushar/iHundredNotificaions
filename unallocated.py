@@ -3,7 +3,7 @@ from dotenv import load_dotenv  # Add this import
 import psycopg2
 import boto3
 from botocore.exceptions import ClientError
-from logger import get_logger
+from logger_config import get_logger
 from typing import List, Dict, Tuple, Optional
 load_dotenv()  # Add this line before accessing any environment variables
 
@@ -321,4 +321,6 @@ def send_unallocated_student_notifications():
                 logger.error(f"Failed to send notification to {rep_email}")
 
 if __name__ == "__main__":
+    logger.info("Notifications Regarding Unallocated Students: Scheduled Script Started Running...")
     send_unallocated_student_notifications()
+    logger.info("Notifications Regarding Unallocated Students: Scheduled Script Ended...")

@@ -3,7 +3,7 @@ import psycopg2
 from dotenv import load_dotenv
 import boto3
 from botocore.exceptions import ClientError
-from logger import get_logger
+from logger_config import get_logger
 from typing import List, Dict, Tuple
 
 # Load environment variables
@@ -308,4 +308,6 @@ def send_summary_report():
             raise
 
 if __name__ == "__main__":
+    logger.info("Monthy Summary Report : Scheduled Script Started Running...")
     send_summary_report()
+    logger.info("Monthy Summary Report : Scheduled Script Ended...")

@@ -6,9 +6,6 @@ import logging
 import boto3
 from botocore.exceptions import ClientError, BotoCoreError
 import watchtower  # Python CloudWatch logging handler
-from logger import get_logger
-
-logger = get_logger()
 
 load_dotenv()
 

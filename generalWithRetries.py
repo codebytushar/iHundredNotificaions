@@ -7,7 +7,7 @@ from typing import List, Dict, Optional, Tuple, Set
 from datetime import datetime
 import time
 from general import create_student_email
-from logger import get_logger
+from logger_config import get_logger
 
 logger = get_logger()
 # Load environment variables
@@ -80,7 +80,6 @@ def send_emails_with_retry(
             if email_sender.send_email(recipients, subject, html_body):
                 for email in recipients:
                     tracker.add_success(email)
-                logger.info(f"Successfully sent to {len(recipients)} recipients")
                 return
             else:
                 raise Exception("Email sending failed")
@@ -136,16 +135,18 @@ def send_reminders():
                 send_emails_with_retry(email_sender, tracker, chunk, subject, html_body)
             
             # Log final results
-            logger.info(f"Successfully sent to {len(tracker.successful_emails)} emails")
+            logger.info(f"Reminder Successfully sent to {len(tracker.successful_emails)} emails. Emails: {list(tracker.successful_emails)}")
             if tracker.failed_emails:
                 logger.error(f"Failed to send to {len(tracker.failed_emails)} emails: {list(tracker.failed_emails)}")
                 # Here you could save failed emails to a file or database for later retry
-                with open("failed_emails.txt", "w") as f:
-                    f.write("\n".join(tracker.failed_emails))
+                # with open("failed_emails.txt", "w") as f:
+                #     f.write("\n".join(tracker.failed_emails))
             
         except Exception as e:
             logger.error(f"Error in reminder process: {str(e)}")
             raise
 
 if __name__ == "__main__":
+    logger.info("Notification Regarding Staying on the Course : Schedule Script Started Running...")
     send_reminders()
+    logger.info("Notification Regarding Staying on the Course : Schedule Script Ended...")

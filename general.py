@@ -7,7 +7,7 @@ import logging
 from typing import List, Dict, Optional, Tuple  # Add Tuple to imports
 from datetime import datetime
 # another_script.py
-from logger import get_logger
+from logger_config import get_logger
 
 logger = get_logger()
 
