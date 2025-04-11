@@ -6,13 +6,13 @@ from pathlib import Path
 # Environment Variables or inline (you can replace with secrets/environment in GitHub Actions)
 DB_HOST = os.getenv("DB_HOST", "ep-damp-term-487147.us-east-1.aws.neon.tech")
 DB_PORT = os.getenv("DB_PORT", "5432")
-DB_NAME = os.getenv("INTRANET_DB_NAME", "intranet")
+INTRANET_DB_NAME = os.getenv("INTRANET_DB_NAME", "intranet")
 DB_USER = os.getenv("DB_USER", "goheltushar")
 DB_PASSWORD = os.getenv("DB_PASSWORD", "your_password_here")
 BACKUP_DIR = os.getenv("BACKUP_DIR", "/home/ihundred/backups")
 
 STORAGE_ACCOUNT = os.getenv("AZURE_STORAGE_ACCOUNT", "ihundredbackups")
-STORAGE_CONTAINER = os.getenv("INTRANET_AZURE_STORAGE_CONTAINER", "intranetdbs")
+INTRANET_AZURE_STORAGE_CONTAINER = os.getenv("INTRANET_AZURE_STORAGE_CONTAINER", "intranetdbs")
 SAS_TOKEN = os.getenv("AZURE_SAS_TOKEN", "your_sas_token_here")
 
 # Prepare backup file
@@ -27,7 +27,7 @@ env = os.environ.copy()
 env["PGPASSWORD"] = DB_PASSWORD
 
 # Perform pg_dump
-print(f"Starting backup of database '{DB_NAME}' to {backup_file}...")
+print(f"Starting backup of database '{INTRANET_DB_NAME}' to {backup_file}...")
 dump_cmd = [
     "pg_dump",
     "-h", DB_HOST,
@@ -37,7 +37,7 @@ dump_cmd = [
     "-b",
     "-v",
     "-f", str(backup_file),
-    DB_NAME
+    INTRANET_DB_NAME
 ]
 
 result = subprocess.run(dump_cmd, env=env)
@@ -49,7 +49,7 @@ if result.returncode == 0:
         "azcopy",
         "copy",
         str(backup_file),
-        f"https://{STORAGE_ACCOUNT}.blob.core.windows.net/{STORAGE_CONTAINER}/{backup_file.name}?{SAS_TOKEN}"
+        f"https://{STORAGE_ACCOUNT}.blob.core.windows.net/{INTRANET_AZURE_STORAGE_CONTAINER}/{backup_file.name}?{SAS_TOKEN}"
     ]
 
     subprocess.run(azcopy_cmd)

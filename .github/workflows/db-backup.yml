@@ -27,11 +27,13 @@ jobs:
           DB_HOST: ${{ secrets.DB_HOST }}
           DB_PORT: "5432"
           DB_NAME: ${{ secrets.DB_NAME }}
+          INTRANET_DB_NAME: ${{ secrets.INTRANET_DB_NAME }}
           DB_USER: ${{ secrets.DB_USER }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           BACKUP_DIR: "/tmp/backups"
           AZURE_STORAGE_ACCOUNT: ${{ secrets.AZURE_STORAGE_ACCOUNT }}
           AZURE_STORAGE_CONTAINER: ${{ secrets.AZURE_STORAGE_CONTAINER }}
+          INTRANET_AZURE_STORAGE_CONTAINER: ${{ secrets.INTRANET_AZURE_STORAGE_CONTAINER }}
           AZURE_SAS_TOKEN: ${{ secrets.AZURE_SAS_TOKEN }}
         run: |
           pip install --upgrade pip
