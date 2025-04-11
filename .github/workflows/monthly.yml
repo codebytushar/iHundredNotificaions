@@ -1,4 +1,4 @@
-name: Weekly Jobs (generalWithRetries,summary)
+name: Monthly Jobs (generalWithRetries,summary)
 
 on:
   schedule:
