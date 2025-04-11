@@ -20,6 +20,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+      - name: Debug environment (safe values only)
+        run: |
+          echo "DB_HOST=$DB_HOST"
+          echo "DB_USER=$DB_USER"
+
       - name: Checkout code
         uses: actions/checkout@v3
 
