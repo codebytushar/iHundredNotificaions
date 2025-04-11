@@ -1,4 +1,4 @@
-name: Run Multiple Scripts Sequentially
+name: Weekly Jobs (lt50fy,lt100fy,vpa,unallocated)
 
 on:
   schedule:
@@ -45,11 +45,3 @@ jobs:
       - name: Notification Regarding Less Than 50 and In a Final Year
         run: python unallocated.py
 
-      
-
-      
-      # - name: Run script 2
-      #   run: python scripts/second_script.py
-
-      # - name: Run script 3
-      #   run: python scripts/third_script.py

@@ -1,4 +1,4 @@
-name: Run Multiple Scripts Sequentially
+name: Weekly Jobs (generalWithRetries,summary)
 
 on:
   schedule:
