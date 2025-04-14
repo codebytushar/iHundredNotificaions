@@ -53,17 +53,17 @@ def send_email(recipient: str, subject: str, html_body: str) -> bool:
     )
     
     try:
-        # response = ses_client.send_email(
-        #     Source=SENDER_EMAIL,
-        #     Destination={'ToAddresses': [recipient]},
-        #     Message={
-        #         'Subject': {'Data': subject},
-        #         'Body': {
-        #             'Html': {'Data': html_body},
-        #             'Text': {'Data': "Please view this email in an HTML-enabled client."}
-        #         }
-        #     }
-        # )
+        response = ses_client.send_email(
+            Source=SENDER_EMAIL,
+            Destination={'ToAddresses': [recipient]},
+            Message={
+                'Subject': {'Data': subject},
+                'Body': {
+                    'Html': {'Data': html_body},
+                    'Text': {'Data': "Please view this email in an HTML-enabled client."}
+                }
+            }
+        )
         logger.info(f"Email sent to {recipient}")
         return True
     except Exception as e:

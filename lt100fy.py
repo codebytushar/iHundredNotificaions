@@ -264,8 +264,15 @@ def send_notifications():
             student_subject, student_body = create_student_email()
             student_emails = list(set([student.email for student in students]))
             
-            if email_sender.send_email(student_emails, student_subject, student_body):
-                logger.info(f"Sent notifications to {len(student_emails)} students")
+            if len(student_emails) > 50:
+                # Partition the student emails into chunks of 50
+                for i in range(0, len(student_emails), 50):
+                    email_chunk = student_emails[i:i + 50]
+                    if email_sender.send_email(email_chunk, student_subject, student_body):
+                        logger.info(f"Sent notifications to {len(email_chunk)} students in chunk {i // 50 + 1}")
+            else:
+                if email_sender.send_email(student_emails, student_subject, student_body):
+                    logger.info(f"Sent notifications to {len(student_emails)} students")
             
             # Group students by verifier and send emails
             verifier_map: Dict[str, List[StudentRecord]] = {}
