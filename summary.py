@@ -296,18 +296,30 @@ def send_summary_report():
                 'tushar.gohil@scet.ac.in'
             ]
             recipients.update(additional_recipients)
+
+            # Add verifier emails to recipients
+            for verifier in verifier_data:
+                recipients.add(verifier['verifierEmail'])
             
             # Send email
-            if email_sender.send_email(list(recipients), subject, html_body):
-                logger.info("Summary report sent successfully")
+            if len(recipients) > 50:
+                recipient_chunks = [list(recipients)[i:i + 50] for i in range(0, len(recipients), 50)]
+                for chunk in recipient_chunks:
+                    if email_sender.send_email(chunk, subject, html_body):
+                        logger.info(f"Monthly summary report sent successfully to chunk: {chunk}")
+                    else:
+                        logger.error(f"Failed to send monthly summary report to chunk: {chunk}")
             else:
-                logger.error("Failed to send summary report")
+                if email_sender.send_email(list(recipients), subject, html_body):
+                    logger.info("Monthly summary report sent successfully")
+                else:
+                    logger.error("Failed to send monthly summary report")
                 
         except Exception as e:
             logger.error(f"Error generating report: {str(e)}")
             raise
 
 if __name__ == "__main__":
-    logger.info("Monthy Summary Report : Scheduled Script Started Running...")
+    logger.info("Monthly Summary Report : Scheduled Script Started Running...")
     send_summary_report()
-    logger.info("Monthy Summary Report : Scheduled Script Ended...")
+    logger.info("Monthly Summary Report : Scheduled Script Ended...")
