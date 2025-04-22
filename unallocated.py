@@ -92,7 +92,8 @@ class DatabaseManager:
         query = """
             SELECT id, name, email, role, "verifierEmail", deptcode, batch, enrollmentno, userstatus 
             FROM public."User" 
-            WHERE "verifierEmail" IS NULL AND role = 'student'
+            WHERE "verifierEmail" IS NULL AND role = 'student' AND userstatus != 'deleted'
+            ORDER BY deptcode, enrollmentno
         """
         with self.conn.cursor() as cursor:
             cursor.execute(query)
@@ -313,8 +314,9 @@ def send_unallocated_student_notifications():
             subject, text_body, html_body = create_email_content(
                 deptcode, len(students), pending_approval, pending_allocation
             )
+
             
-            # Send email
+            # # Send email
             if email_sender.send_email(rep_email, subject, html_body, text_body):
                 logger.info(f"Sent notification to {rep_email} for {len(students)} unallocated students in {deptcode}")
             else:
