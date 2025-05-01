@@ -275,6 +275,20 @@ def send_summary_report():
             departments = db.get_departments()
             verifier_data = db.get_verifier_performance()
             
+            # List of verifiers to whom emails should not be sent
+            excluded_verifiers = [
+                'foram.patel@scet.ac.in',
+                'rakesh.patelco@scet.ac.in',
+                'sudhir.yardi@scet.ac.in',
+                'bhargavi.rani@scet.ac.in',
+                'juhi.mehta@scet.ac.in',
+                'bijal.mehta@scet.ac.in'
+            ]
+
+            # Filter out excluded verifiers from the verifier data
+            verifier_data = [verifier for verifier in verifier_data if verifier['verifierEmail'] not in excluded_verifiers]
+           
+
             # Generate tables
             summary_table = generate_summary_table(summary_data, final_year_batch)
             verifier_table = generate_verifier_table(verifier_data)
