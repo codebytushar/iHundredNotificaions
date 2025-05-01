@@ -35,10 +35,11 @@ class EmailSender:
         )
     
     def send_email(self, recipients: List[str], subject: str, html_body: str) -> bool:
+        cleaned_addresses = [email for email in recipients if email.strip()]
         try:
             response = self.ses_client.send_email(
                 Source=SENDER_EMAIL,
-                Destination={'ToAddresses': [recipients]},
+                Destination={'ToAddresses': [cleaned_addresses]},
                 Message={
                     'Subject': {'Data': subject},
                     'Body': {
