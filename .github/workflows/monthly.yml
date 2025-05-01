@@ -33,8 +33,5 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      - name: Notification Regarding Stay On Track
-        run: python generalWithRetries.py
-
       - name: Monthly Summary Report
         run: python summary.py
