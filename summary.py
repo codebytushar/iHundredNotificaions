@@ -35,11 +35,11 @@ class EmailSender:
         )
     
     def send_email(self, recipients: List[str], subject: str, html_body: str) -> bool:
-        cleaned_addresses = [email for email in recipients if email.strip()]
+        cleaned_recipients = [email.strip() for email in recipients if email.strip()]
         try:
             response = self.ses_client.send_email(
                 Source=SENDER_EMAIL,
-                Destination={'ToAddresses': [cleaned_addresses]},
+                Destination={'ToAddresses': cleaned_recipients},
                 Message={
                     'Subject': {'Data': subject},
                     'Body': {
@@ -303,8 +303,8 @@ def send_summary_report():
                 recipients.add(verifier['verifierEmail'])
             
             # Send email
-            if len(recipients) > 50:
-                recipient_chunks = [list(recipients)[i:i + 50] for i in range(0, len(recipients), 50)]
+            if len(recipients) > 10:
+                recipient_chunks = [list(recipients)[i:i + 10] for i in range(0, len(recipients), 10)]
                 for chunk in recipient_chunks:
                     if email_sender.send_email(chunk, subject, html_body):
                         logger.info(f"Monthly summary report sent successfully to chunk: {chunk}")
