@@ -50,7 +50,7 @@ class EmailSender:
         try:
             response = self.ses_client.send_email(
                 Source="IHundred Admin <100activitypoints@scet.ac.in>",
-                Destination={'ToAddresses': [recipients]},
+                Destination={'ToAddresses': recipients},
                 Message={
                     'Subject': {'Data': subject},
                     'Body': {
