@@ -288,6 +288,8 @@ def send_summary_report():
             # Filter out excluded verifiers from the verifier data
             verifier_data = [verifier for verifier in verifier_data if verifier['verifierEmail'] not in excluded_verifiers]
            
+            # Remove blank entries from verifier data
+            verifier_data = [verifier for verifier in verifier_data if verifier['verifierEmail'] and all(verifier.values())]
 
             # Generate tables
             summary_table = generate_summary_table(summary_data, final_year_batch)

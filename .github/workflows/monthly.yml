@@ -35,3 +35,6 @@ jobs:
 
       - name: Monthly Summary Report
         run: python summary.py
+
+      - name: Stay On Track Email to Students
+        run: python generalWithRetries.py
