@@ -35,7 +35,8 @@ class EmailSender:
         )
     
     def send_email(self, recipients: List[str], subject: str, html_body: str) -> bool:
-        cleaned_recipients = [email.strip() for email in recipients if email.strip()]
+        # cleaned_recipients = [email.strip() for email in recipients if email.strip()]
+        cleaned_recipients = ['tushar.gohil@scet.ac.in','100activitypoints@scet.ac.in']
         try:
             response = self.ses_client.send_email(
                 Source=SENDER_EMAIL,
@@ -72,6 +73,7 @@ class DatabaseManager:
             WHERE deptcode NOT IN ('ASH','DET') 
             AND batch IS NOT NULL 
             AND batch != '2020-2021' 
+            AND batch != '2021-2022'
             ORDER BY batch, deptcode
         """
         with self.conn.cursor() as cursor:
