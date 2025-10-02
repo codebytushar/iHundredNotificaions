@@ -35,8 +35,8 @@ class EmailSender:
         )
     
     def send_email(self, recipients: List[str], subject: str, html_body: str) -> bool:
-        # cleaned_recipients = [email.strip() for email in recipients if email.strip()]
-        cleaned_recipients = ['tushar.gohil@scet.ac.in','100activitypoints@scet.ac.in']
+        cleaned_recipients = [email.strip() for email in recipients if email.strip()]
+        # cleaned_recipients = ['tushar.gohil@scet.ac.in','100activitypoints@scet.ac.in']
         try:
             response = self.ses_client.send_email(
                 Source=SENDER_EMAIL,
